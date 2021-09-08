@@ -14,7 +14,7 @@ import {
 export function AdminRoutes() {
     return (
         <>
-            <NavBar/>
+            {/* <NavBar/> */}
                 <Switch>
                     <Route exact path = {ADMIN_DASHBOARD}>
                         <AdminDashboard/>
@@ -28,10 +28,10 @@ export function AdminRoutes() {
                     <Route exact path = {ADMIN_PRODUCTS}>
                         <Products/>
                     </Route>
-                    <Redirect exact to="/admin" from={ADMIN_DASHBOARD} />
+                    <Redirect exact to={ADMIN_DASHBOARD} from="/admin" />
                     <Redirect exact to="/404" from="*" />
                 </Switch>
-            <Footer/>
+            {/* <Footer/> */}
         </>
     );
 }

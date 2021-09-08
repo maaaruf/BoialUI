@@ -1,4 +1,5 @@
 import { ActionTypes } from "../../../store/actionType";
+import Products from '../products/products';
 
 export default function Home () {
 
@@ -7,7 +8,8 @@ export default function Home () {
     return (
         
         <>
-            <p>Home Page</p>
+            {/* <p>Home Page</p> */}
+            <Products />
         </>
     );
 }

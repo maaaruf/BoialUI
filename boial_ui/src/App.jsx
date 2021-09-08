@@ -6,9 +6,8 @@ import Layout from './shared/components/layout/layout';
 function App() {
   return (
     <>
-      <Layout>
-        <Router />
-      </Layout>
+      <Layout />
+      <Router />
     </>
   );
 }

@@ -15,9 +15,11 @@ export default function Login() {
     
     const updateUserInfo = (property, value)=>{
         setUserInfo(user=> ({...user, [property]:value}));
+        console.log(userInfo);
     }
 
-    const login = ()=>{
+    const login = (e)=>{
+        e.preventDefault();
         console.log(userInfo, "UserInfo from login page ========");
 
         dispatch(signInAction(userInfo));
@@ -51,7 +53,7 @@ export default function Login() {
                         <span class="material-icons-outlined"> lock </span>
                     </div>
 
-                    <button class="button" onClick={login}>
+                    <button class="button" onClick={(e)=> login(e)}>
                         <span>Login</span>
                     </button>
 

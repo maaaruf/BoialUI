@@ -12,7 +12,7 @@ import NavBar from "../shared/components/navbar/navbar2";
 export function UserRoutes() {
     return (
         <>
-            <NavBar />
+            {/* <NavBar /> */}
                 <Switch>
                     <Route exact path={CART}>
                         <Cart />
@@ -20,9 +20,10 @@ export function UserRoutes() {
                     <Route exact path={PROFILE}>
                         <Profile />
                     </Route>
+                    <Redirect exact to={PROFILE} from="/user" />
                     <Redirect exact to="/404" from="*" />
                 </Switch>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }
