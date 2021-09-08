@@ -1,3 +1,5 @@
+export const BASE_URL = "http://localhost:8080"
+
 export const HOME = "/home";
 export const SHOP = "/shop";
 export const ABOUT = "/about";

@@ -11,14 +11,14 @@ export default function Router() {
             <Route exact path="/404">
                 <NotFound />
             </Route>
-            <Route path="/">
-                <CommonRoutes />
-            </Route>
             <Route path="/user">
                 <UserRoutes />
             </Route>
             <Route path="/admin">
                 <AdminRoutes />
+            </Route>
+            <Route path="/">
+                <CommonRoutes />
             </Route>
         </Switch>
     )

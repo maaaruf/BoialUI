@@ -3,10 +3,13 @@ import AdminDashboard from "./components/admindashboard/admindashboard";
 import Categories from "./components/categories/categories";
 import Orders from "./components/orders/orders";
 import Products from "./components/products/products";
-import { Switch } from "react-router";
-import { Route } from "react-router";
 import NavBar from "./components/navbar/navbar";
 import Footer from "../shared/components/footer/footer";
+import { 
+    Switch, 
+    Route, 
+    Redirect 
+} from "react-router";
 
 export function AdminRoutes() {
     return (
@@ -25,8 +28,9 @@ export function AdminRoutes() {
                     <Route exact path = {ADMIN_PRODUCTS}>
                         <Products/>
                     </Route>
+                    <Redirect exact to="/admin" from={ADMIN_DASHBOARD} />
+                    <Redirect exact to="/404" from="*" />
                 </Switch>
-            <Redirect exact to="/404" from="*" />
             <Footer/>
         </>
     );
