@@ -1,4 +1,4 @@
-import { ADMIN_CATEGORIES, ADMIN_DASHBOARD, ADMIN_ORDERS, ADMIN_PRODUCTS } from "../utils/constants";
+import { ADMIN_CATEGORIES, ADMIN_CREATEPRODUCT, ADMIN_DASHBOARD, ADMIN_ORDERS, ADMIN_PRODUCTS } from "../utils/constants";
 import AdminDashboard from "./components/admindashboard/admindashboard";
 import Categories from "./components/categories/categories";
 import Orders from "./components/orders/orders";
@@ -10,6 +10,7 @@ import {
     Route, 
     Redirect 
 } from "react-router";
+import CreateProduct from "./components/products/createProduct";
 
 export function AdminRoutes() {
     return (
@@ -18,6 +19,9 @@ export function AdminRoutes() {
                 <Switch>
                     <Route exact path = {ADMIN_DASHBOARD}>
                         <AdminDashboard/>
+                    </Route>
+                    <Route exact path = {ADMIN_CREATEPRODUCT}>
+                        <CreateProduct/>
                     </Route>
                     <Route exact path = {ADMIN_CATEGORIES}>
                         <Categories/>
