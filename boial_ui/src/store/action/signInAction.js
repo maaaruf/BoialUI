@@ -21,13 +21,7 @@ export const signInAction = (user) => {
             password: user.password,
         });
 
-        console.log(response.data, "login resonse from signInAction ========");
-        localStorage.setItem(ActionTypes.SIGN_IN, JSON.stringify(response.data));
-        // const { message, userInfo } = response.data;
-        // if (userInfo && message) {
-            dispatch(setUserSignInData(response.data));
-        // } else {
-        //     dispatch(setUserError(message));
-        // }
+        dispatch(setUserSignInData(response.data));
+        console.log(response.data, "==========================");
     }
 };
