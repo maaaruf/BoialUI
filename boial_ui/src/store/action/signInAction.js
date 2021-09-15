@@ -2,7 +2,7 @@ import { ActionTypes } from "../actionType";
 import axios from "axios";
 import { history } from "../../utils/helpers/helper";
 
-export const setUserSignInData = (user) => {
+const setData = (user) => {
     console.log("calling setUserSignInData from signIn Action");
     return {
         type: ActionTypes.SIGN_IN,
@@ -21,7 +21,7 @@ export const signInAction = (user) => {
             password: user.password,
         });
 
-        dispatch(setUserSignInData(response.data));
+        dispatch(setData(response.data));
         console.log(response.data, "==========================");
     }
 };

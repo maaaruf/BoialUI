@@ -19,5 +19,12 @@ export const ADMIN_USERS = "/admin/users";
 
 export const ADMIN_PRODUCTS = "/admin/products";
 export const ADMIN_CREATEPRODUCT = "/admin/create-product";
+export const ADMIN_CREATECATEGORY = "/admin/create-category";
+
+
+export const SUCCESSFUL = "SUCCESSFUL";
+export const WARNING = "WARNING";
+export const INFO = "INFO";
+export const ERROR = "ERROR";
 
 

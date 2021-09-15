@@ -1,4 +1,6 @@
 export const ActionTypes = {
     SIGN_IN:"SIGN_IN",
-    SIGN_OUT:"SIGN_OUT"
+    SIGN_OUT:"SIGN_OUT",
+    CREATE_CATEGORY:"CREATE_CATEGORY",
+    CATEGORY:"CATEGORY"
 }

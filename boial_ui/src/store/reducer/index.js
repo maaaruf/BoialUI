@@ -3,6 +3,8 @@ import signInReducer from './signInReducer';
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { ActionTypes } from "../actionType";
+import categoryReducer from "./categoryReducer"; 
+
 
 const persistConfig = {
     key: ActionTypes.SIGN_IN,
@@ -12,5 +14,6 @@ const persistConfig = {
 export const persistedStore = persistReducer(persistConfig ,signInReducer);
 
 export const mainReducer = combineReducers({
-    UserInfoStore: persistedStore
+    UserInfoStore: persistedStore,
+    CategoryStore: categoryReducer
 });
