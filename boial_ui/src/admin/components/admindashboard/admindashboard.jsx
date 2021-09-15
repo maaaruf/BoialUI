@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router";
-import { ADMIN_CREATEPRODUCT } from "../../../utils/constants";
+import { ADMIN_CREATECATEGORY, ADMIN_CREATEPRODUCT } from "../../../utils/constants";
 
 export default function AdminDashboard() {
     const history = useHistory();
@@ -9,12 +9,19 @@ export default function AdminDashboard() {
         history.push(ADMIN_CREATEPRODUCT);
     }
 
+    const createCategory = () => {
+        history.push(ADMIN_CREATECATEGORY);
+    }
+
     return (
         <>
             <p>Admin Dashboard page</p>
 
             <div className="button" onClick= {createProduct} >
                 <span>Create Product</span>
+            </div>
+            <div className="button" onClick= {createProduct} >
+                <span>Create Category</span>
             </div>
         </>
     );

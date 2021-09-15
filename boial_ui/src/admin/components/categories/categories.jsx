@@ -10,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { loadCategoriesAction } from '../../../store/action/categoryAction';
+import { Button, ButtonGroup, Modal } from '@material-ui/core';
+import EditCategory from './editCategory';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -48,24 +50,21 @@ const useStyles = makeStyles({
 
 export default function Categories() {
     const dispatch = useDispatch();
+    let categories = useSelector((store) => store.CategoryStore.data);
 
     useEffect(() => {
         dispatch(loadCategoriesAction());
     }, []);
 
-    let rows2 = useSelector((store) => store.categoryStore);
-    console.log(rows2, "category from categories page");
-
-    // setTimeout(() => {
-    //     let rows2 = useSelector((store) => store.categoryStore);
-    //     console.log(rows2, "category from categories page");
-    // },2000);
+    console.log(categories, "category from categories page");
 
     const classes = useStyles();
 
     return (
         <>
             <p>Categories</p>
+
+            <EditCategory></EditCategory>
             <br />
             <br />
             <br />
@@ -74,20 +73,25 @@ export default function Categories() {
                     <TableHead>
                         <TableRow>
                             <StyledTableCell>Id</StyledTableCell>
-                            <StyledTableCell align="center">Name</StyledTableCell>
+                            <StyledTableCell align="left">Name</StyledTableCell>
                             <StyledTableCell align="right">Description</StyledTableCell>
                             <StyledTableCell align="right">Action</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {categories.map((row) => (
                             <StyledTableRow key={row.name}>
                                 <StyledTableCell component="th" scope="row">
-                                    {row.id}
+                                    {row._id}
                                 </StyledTableCell>
-                                <StyledTableCell align="center">{row.name}</StyledTableCell>
+                                <StyledTableCell align="left">{row.name}</StyledTableCell>
                                 <StyledTableCell align="right">{row.description}</StyledTableCell>
-                                <StyledTableCell align="right">{row.action}</StyledTableCell>
+                                <StyledTableCell align="right">
+                                    <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+                                        <EditCategory />
+                                        <Button>Delete</Button>
+                                    </ButtonGroup>
+                                </StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
