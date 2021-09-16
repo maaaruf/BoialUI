@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { loadCategoriesAction } from '../../../store/action/categoryAction';
+import { deleteCategoryAction, loadCategoriesAction } from '../../../store/action/categoryAction';
 import { Button, ButtonGroup, Modal } from '@material-ui/core';
 import EditCategory from './editCategory';
 
@@ -56,7 +56,10 @@ export default function Categories() {
         dispatch(loadCategoriesAction());
     }, []);
 
-    console.log(categories, "category from categories page");
+    const deleteCategory = (e, id) => {
+        e.preventDefault();
+        dispatch(deleteCategoryAction(id));
+    }
 
     const classes = useStyles();
 
@@ -86,7 +89,7 @@ export default function Categories() {
                                 <StyledTableCell align="right">
                                     <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
                                         <EditCategory categoryId = {row._id}/>
-                                        <Button>Delete</Button>
+                                        <Button onClick = {(e)=>deleteCategory(e, row._id)}>Delete</Button>
                                     </ButtonGroup>
                                 </StyledTableCell>
                             </StyledTableRow>

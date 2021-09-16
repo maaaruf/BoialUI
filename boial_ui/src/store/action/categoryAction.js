@@ -86,6 +86,7 @@ export const getCategoryAction = (id) => {
 
             toastNotify(`Category Loaded Successfully.`, SUCCESSFUL);
             dispatch(setSingleCategory(response.data));
+            
         }
         catch (e) {
             toastNotify(`Faild to create Load. ${e}`, ERROR);
@@ -100,10 +101,11 @@ export const deleteCategoryAction = (id) => {
             const { UserInfoStore } = getState();
             const token = UserInfoStore.token;
             const url = `${BASE_URL}/category/${id}`;
-            const response = await axios.post(url, {}, { headers: { authorization: `bearer ${token}` } });
+            const response = await axios.delete(url, { headers: { authorization: `bearer ${token}` } });
 
             toastNotify(`${response?.data?.name} Deleted Successfully.`, SUCCESSFUL);
-            console.log(response, "==========================");
+            
+            dispatch(loadCategoriesAction());
         }
         catch (e) {
             toastNotify(`Faild to delete. ${e}`, ERROR);
