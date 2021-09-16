@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { loadCategoriesAction } from '../../../store/action/categoryAction';
 import { Button, ButtonGroup, Modal } from '@material-ui/core';
 import EditCategory from '../categories/editCategory';
+import { loadProductsAction } from '../../../store/action/productAction';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -50,19 +51,18 @@ const useStyles = makeStyles({
 
 export default function Products() {
     const dispatch = useDispatch();
-    const products = useSelector((store) => store.ProductStore.data);
+    const products = useSelector((store) => store.ProductsStore.data);
+    const classes = useStyles();
 
     useEffect(() => {
-        dispatch(loadCategoriesAction());
+        dispatch(loadProductsAction()); 
     }, []);
 
-    console.log(products, "category from categories page");
-
-    const classes = useStyles();
+    console.log(products, "products from products page");
 
     return (
         <>
-            <p>Categories</p>
+            <p>Products</p>
             <br />
 
             <TableContainer component={Paper}>
@@ -70,20 +70,24 @@ export default function Products() {
                     <TableHead>
                         <TableRow>
                             <StyledTableCell>Id</StyledTableCell>
-                            <StyledTableCell align="left">Name</StyledTableCell>
+                            <StyledTableCell align="left">Title</StyledTableCell>
+                            <StyledTableCell align="right">Stock</StyledTableCell>
+                            <StyledTableCell align="right">Price</StyledTableCell>
                             <StyledTableCell align="right">Description</StyledTableCell>
-                            <StyledTableCell align="right">Action</StyledTableCell>
+                            <StyledTableCell align="center">Action</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {products.map((row) => (
+                        {products?.map((row) => (
                             <StyledTableRow key={row.name}>
                                 <StyledTableCell component="th" scope="row">
                                     {row._id}
                                 </StyledTableCell>
-                                <StyledTableCell align="left">{row.name}</StyledTableCell>
+                                <StyledTableCell align="left">{row.title}</StyledTableCell>
+                                <StyledTableCell align="right">{row.stock}</StyledTableCell>
+                                <StyledTableCell align="right">{row.price}</StyledTableCell>
                                 <StyledTableCell align="right">{row.description}</StyledTableCell>
-                                <StyledTableCell align="right">
+                                <StyledTableCell align="center">
                                     <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
                                         <EditCategory categoryId = {row._id}/>
                                         <Button>Delete</Button>

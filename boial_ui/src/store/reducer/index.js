@@ -4,6 +4,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { ActionTypes } from "../actionType";
 import { categoryReducer, singleCategoryReducer } from "./categoryReducer"; 
+import { productsReducer, singleProductReducer } from "./productReducer";
 
 
 const persistConfig = {
@@ -17,4 +18,6 @@ export const mainReducer = combineReducers({
     UserInfoStore: persistedStore,
     CategoryStore: categoryReducer,
     SingleCategoryStore: singleCategoryReducer,
+    ProductsStore: productsReducer,
+    SingleProductStore: singleProductReducer,
 });

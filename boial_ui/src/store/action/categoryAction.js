@@ -92,3 +92,21 @@ export const getCategoryAction = (id) => {
         }
     }
 };
+
+export const deleteCategoryAction = (id) => {
+
+    return async (dispatch, getState) => {
+        try {
+            const { UserInfoStore } = getState();
+            const token = UserInfoStore.token;
+            const url = `${BASE_URL}/category/${id}`;
+            const response = await axios.post(url, {}, { headers: { authorization: `bearer ${token}` } });
+
+            toastNotify(`${response?.data?.name} Deleted Successfully.`, SUCCESSFUL);
+            console.log(response, "==========================");
+        }
+        catch (e) {
+            toastNotify(`Faild to delete. ${e}`, ERROR);
+        }
+    }
+};

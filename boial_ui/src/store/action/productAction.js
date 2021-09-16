@@ -4,6 +4,13 @@ import { ActionTypes } from "../actionType";
 import { useSelector } from "react-redux";
 import { toastNotify } from "../../utils/helpers/toastHelper";
 
+const setProductsList = (data)=> {
+    return {
+        type: ActionTypes.PRODUCTS,
+        payload: data,
+    };
+}
+
 export const createProductAction = (product) => {
     // const userSignInInfo = useSelector((store) => store.UserInfoStore);
     // console.log(category, "category from CategoryAction.");
@@ -22,6 +29,24 @@ export const createProductAction = (product) => {
         }
         catch(e){
             toastNotify(`Faild to create ${product.title}. ${e}`, ERROR);
+        }
+    }
+};
+
+export const loadProductsAction = () => {
+
+    return async (dispatch, getState) => {
+        try {
+            const url = `${BASE_URL}/products`;
+            const { UserInfoStore } = getState();
+            const token = UserInfoStore.token;
+            const response = await axios.get(url, {}, { headers: { authorization: `bearer ${token}` } });
+
+            toastNotify(`Products Loaded Successfully.`, SUCCESSFUL);
+            dispatch(setProductsList(response.data));
+        }
+        catch(e){
+            toastNotify(`Faild to load products. ${e}`, ERROR);
         }
     }
 };
