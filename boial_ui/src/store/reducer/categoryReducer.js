@@ -1,10 +1,14 @@
 import { ActionTypes } from "../actionType";
 
-const initialState = {
+const initialCategoryListState = {
+    data:[]
+};
+
+const initialSingleCategoryState = {
     data:{}
 };
 
-export const categoryReducer = (state = initialState, action) => {
+export const categoryReducer = (state = initialCategoryListState, action) => {
     console.log(action.payload, "actions payload from category reducer");
     let data = action.payload;
     switch (action.type){
@@ -15,7 +19,7 @@ export const categoryReducer = (state = initialState, action) => {
     }
 }
 
-export const singleCategoryReducer = (state = initialState, action) => {
+export const singleCategoryReducer = (state = initialSingleCategoryState, action) => {
     console.log(action.payload, "actions payload from category reducer");
     let data = action.payload;
     switch (action.type){

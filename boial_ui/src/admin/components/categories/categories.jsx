@@ -50,7 +50,7 @@ const useStyles = makeStyles({
 
 export default function Categories() {
     const dispatch = useDispatch();
-    let categories = useSelector((store) => store.CategoryStore.data);
+    const categories = useSelector((store) => store.CategoryStore.data);
 
     useEffect(() => {
         dispatch(loadCategoriesAction());
@@ -63,11 +63,8 @@ export default function Categories() {
     return (
         <>
             <p>Categories</p>
+            <br />
 
-            <EditCategory></EditCategory>
-            <br />
-            <br />
-            <br />
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="customized table">
                     <TableHead>
@@ -88,7 +85,7 @@ export default function Categories() {
                                 <StyledTableCell align="right">{row.description}</StyledTableCell>
                                 <StyledTableCell align="right">
                                     <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-                                        <EditCategory />
+                                        <EditCategory categoryId = {row._id}/>
                                         <Button>Delete</Button>
                                     </ButtonGroup>
                                 </StyledTableCell>
