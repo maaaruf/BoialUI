@@ -3,7 +3,7 @@ import {
     Route,
     Redirect
 } from "react-router";
-import { HOME, LOGIN, LOGOUT, SHOP, SIGNUP } from "../utils/constants";
+import { HOME, LOGIN, LOGOUT, PRODUCT_DETAIL, SHOP, SIGNUP } from "../utils/constants";
 import Footer from "./components/footer/footer";
 import Home from "./components/home/home";
 import Login from "./components/login/login";
@@ -11,6 +11,7 @@ import Logout from "./components/logout/logout";
 import NavBar from "./components/navbar/navbar";
 import Product from "./components/book/book";
 import SignUp from "./components/signup/signup";
+import { ProductDetail } from "./components/productDetail/productDetail";
 
 export default function CommonRoutes() {
     return (
@@ -21,6 +22,9 @@ export default function CommonRoutes() {
                 </Route>
                 <Route exact path={`${SHOP}/:id`}>
                     <Product />
+                </Route>
+                <Route exact path={`${PRODUCT_DETAIL}/:id`}>
+                    <ProductDetail />
                 </Route>
                 <Route exact path={LOGIN}>
                     <Login />

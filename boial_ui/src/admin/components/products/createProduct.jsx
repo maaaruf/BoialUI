@@ -39,7 +39,7 @@ export default function CreateProduct() {
     image: "",
     stock: 0,
     category: {
-      _id: "6141fbb57cb01e38d4e851ad",
+      _id: "6142e6bf100eb645a877824f",
     }
   });
 

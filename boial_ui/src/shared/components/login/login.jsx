@@ -6,12 +6,16 @@ import { BASE_URL } from '../../../utils/constants';
 import { signInAction } from '../../../store/action/signInAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionTypes } from '../../../store/actionType';
+import { history } from '../../../utils/helpers/helper';
+import { useHistory } from 'react-router';
 
 
 export default function Login() {
     
     const dispatch = useDispatch();
+    const userSignIn = useSelector((store) => store.UserInfoStore);
     const [userInfo, setUserInfo] = useState({email:"", password:""});
+    const history = useHistory();
     
     const updateUserInfo = (property, value)=>{
         setUserInfo(user=> ({...user, [property]:value}));
@@ -20,21 +24,10 @@ export default function Login() {
 
     const login = (e)=>{
         e.preventDefault();
-        console.log(userInfo, "UserInfo from login page ========");
+        //history.push('/home');
 
         dispatch(signInAction(userInfo));
     }
-
-    const userSignIn = useSelector((store) => store.UserInfoStore);
-    console.log(userSignIn, "userSignIn data pulled from redux store");
-
-    
-
-    setTimeout(()=>{
-        const userStorage = JSON.parse(localStorage.getItem(ActionTypes.SIGN_IN));
-        console.log(userStorage,"userSignIn data pulled from local storage");
-    }, 2000);
-    
 
     return (
         <>

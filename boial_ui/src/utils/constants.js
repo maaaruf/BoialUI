@@ -21,6 +21,7 @@ export const ADMIN_PRODUCTS = "/admin/products";
 export const ADMIN_CREATEPRODUCT = "/admin/create-product";
 export const ADMIN_CREATECATEGORY = "/admin/create-category";
 
+export const PRODUCT_DETAIL = "/product-detail";
 
 export const SUCCESSFUL = "SUCCESSFUL";
 export const WARNING = "WARNING";

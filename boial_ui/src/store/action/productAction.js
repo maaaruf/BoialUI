@@ -11,6 +11,13 @@ const setProductsList = (data)=> {
     };
 }
 
+const setSingleProduct = (data)=> {
+    return {
+        type: ActionTypes.PRODUCT,
+        payload: data,
+    };
+}
+
 export const createProductAction = (product) => {
     // const userSignInInfo = useSelector((store) => store.UserInfoStore);
     // console.log(category, "category from CategoryAction.");
@@ -44,6 +51,24 @@ export const loadProductsAction = () => {
 
             toastNotify(`Products Loaded Successfully.`, SUCCESSFUL);
             dispatch(setProductsList(response.data));
+        }
+        catch(e){
+            toastNotify(`Faild to load products. ${e}`, ERROR);
+        }
+    }
+};
+
+export const getProductAction = (id) => {
+
+    return async (dispatch, getState) => {
+        try {
+            const url = `${BASE_URL}/products/${id}`;
+            const { UserInfoStore } = getState();
+            const token = UserInfoStore.token;
+            const response = await axios.get(url, {}, { headers: { authorization: `bearer ${token}` } });
+
+            toastNotify(`Products Loaded Successfully.`, SUCCESSFUL);
+            dispatch(setSingleProduct(response.data));
         }
         catch(e){
             toastNotify(`Faild to load products. ${e}`, ERROR);

@@ -6,4 +6,5 @@ export const ActionTypes = {
     GET_CATEGORY:"GET_CATEGORY",
 
     PRODUCTS:"PRODUCTS",
+    PRODUCT:"PRODUCT",
 }
