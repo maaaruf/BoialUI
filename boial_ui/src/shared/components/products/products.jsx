@@ -18,7 +18,7 @@ export default function Products() {
             <div className="videos">
                 {
                     products.map((product) => (
-                        <Product id= {product._id} title={product.title} price={product.price} />
+                        <Product product = {product} />
                     ))
                 }
             </div>

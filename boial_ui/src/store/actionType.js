@@ -7,4 +7,7 @@ export const ActionTypes = {
 
     PRODUCTS:"PRODUCTS",
     PRODUCT:"PRODUCT",
+
+    CART:"CART",
+    TEMP_CART:"TEMP_CART"
 }

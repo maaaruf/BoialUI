@@ -5,14 +5,21 @@ import storage from "redux-persist/lib/storage";
 import { ActionTypes } from "../actionType";
 import { categoryReducer, singleCategoryReducer } from "./categoryReducer"; 
 import { productsReducer, singleProductReducer } from "./productReducer";
+import { cartReducer, tempCartReducer } from "./cartReducer";
 
 
-const persistConfig = {
-    key: ActionTypes.SIGN_IN,
+const userInfoPersistConfig = {
+    key: 'userInfo',
     storage: storage
 }
 
-export const persistedStore = persistReducer(persistConfig ,signInReducer);
+const tempCartPersistConfig = {
+    key: 'tempCart',
+    storage: storage
+}
+
+export const persistedStore = persistReducer(userInfoPersistConfig ,signInReducer);
+export const persistedTempCartStore = persistReducer(tempCartPersistConfig ,tempCartReducer);
 
 export const mainReducer = combineReducers({
     UserInfoStore: persistedStore,
@@ -20,4 +27,6 @@ export const mainReducer = combineReducers({
     SingleCategoryStore: singleCategoryReducer,
     ProductsStore: productsReducer,
     SingleProductStore: singleProductReducer,
+    CartStore: cartReducer,
+    TempCartStore: persistedTempCartStore
 });

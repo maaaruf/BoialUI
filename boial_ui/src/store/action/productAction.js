@@ -69,6 +69,8 @@ export const getProductAction = (id) => {
 
             toastNotify(`Products Loaded Successfully.`, SUCCESSFUL);
             dispatch(setSingleProduct(response.data));
+
+            console.log(response, "Response from getProductAction");
         }
         catch(e){
             toastNotify(`Faild to load products. ${e}`, ERROR);

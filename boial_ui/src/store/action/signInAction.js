@@ -22,6 +22,14 @@ export const signInAction = (user) => {
         });
 
         dispatch(setData(response.data));
-        console.log(response.data, "==========================");
+
+        console.log(response.data?.userInfo.role,"login response from signInAction");
+        if(response.data?.userInfo.role == 'admin'){
+            history.push('/admin');
+            window.location.reload();
+        }else{
+            history.push('/home');
+            window.location.reload();
+        }
     }
 };

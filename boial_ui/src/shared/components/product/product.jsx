@@ -1,24 +1,48 @@
 import { useHistory } from 'react-router';
 import productImage from '../../../assets/images/attar.jpg';
-import { PRODUCT_DETAIL } from '../../../utils/constants';
+import { BASE_URL, PRODUCT_DETAIL } from '../../../utils/constants';
 import classes from './product.css';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { Button, Grid, TextField } from "@material-ui/core";
+import { useDispatch } from 'react-redux';
+import { addToCartAction } from '../../../store/action/cartActions';
 
-export default function Product({ id, title, price, category }) {
+
+export default function Product({ product }) {
     const history = useHistory();
+    const dispatch = useDispatch();
 
-    const gotoDetail = (e)=> {
+    const gotoDetail = (e) => {
         e.preventDefault();
-        history.push(`${PRODUCT_DETAIL}/${id}`);
+        history.push(`${PRODUCT_DETAIL}/${product._id}`);
     }
+
+    const addToCart = () => {
+        //e.preventDefault();
+        dispatch(addToCartAction(1, product._id));
+    }
+
     return (
-        <a onClick= {(e) => gotoDetail(e)} >
+        <a >
             <div className="video">
-                <img src={productImage} alt="product Image" />
+                <img onClick={(e) => gotoDetail(e)} src={`${BASE_URL + product.image}`} alt="product Image" />
+                <p>{product.title}</p>
                 <div className="qmeta">
-                    <p>{title}</p>
-                    <p>Price: {price}</p>
+                    <p>Price: {product.price}</p>
+                    <Button
+                        variant="contained"
+                        color="default"
+                        size="large"
+                        className={classes.button}
+                        startIcon={<AddShoppingCartIcon />}
+                        onClick={addToCart}
+                    >
+
+                    </Button>
                 </div>
+
             </div>
+
         </a>
     );
 }
