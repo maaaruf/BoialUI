@@ -9,7 +9,6 @@ const initialSingleCategoryState = {
 };
 
 export const categoryReducer = (state = initialCategoryListState, action) => {
-    console.log(action.payload, "actions payload from category reducer");
     let data = action.payload;
     switch (action.type){
         case ActionTypes.CATEGORY:
@@ -20,7 +19,6 @@ export const categoryReducer = (state = initialCategoryListState, action) => {
 }
 
 export const singleCategoryReducer = (state = initialSingleCategoryState, action) => {
-    console.log(action.payload, "actions payload from category reducer");
     let data = action.payload;
     switch (action.type){
         case ActionTypes.GET_CATEGORY:

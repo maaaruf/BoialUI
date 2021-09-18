@@ -1,6 +1,16 @@
 import { Grid } from "@material-ui/core";
+import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { getCurrentUser } from "../../../store/action/userActions";
 
 export default function Profile() {
+    const user = useSelector(store=> store.CurrentUserStore.data);
+    const dispatch = useDispatch();
+
+    useState(()=> {
+        dispatch(getCurrentUser());
+    });
+
     return <>
         <Grid container spacing={3} justifyContent="center">
             <Grid
@@ -19,6 +29,7 @@ export default function Profile() {
                 item
                 lg={6}>
 
+                
 
             </Grid>
         </Grid>

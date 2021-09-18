@@ -4,7 +4,13 @@ export function Layout({children}) {
             <Grid
                 item
                 lg={3}>
-                    
+                    <button class="button" >
+                    <span>Login</span>
+                </button>
+
+                <button class="button" >
+                    <span>Login</span>
+                </button>
 
             </Grid>
             <Grid

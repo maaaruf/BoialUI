@@ -6,6 +6,7 @@ import { ActionTypes } from "../actionType";
 import { categoryReducer, singleCategoryReducer } from "./categoryReducer"; 
 import { productsReducer, singleProductReducer } from "./productReducer";
 import { cartReducer, tempCartReducer } from "./cartReducer";
+import { currentUserReducer } from "./currentUserReducer";
 
 
 const userInfoPersistConfig = {
@@ -28,5 +29,6 @@ export const mainReducer = combineReducers({
     ProductsStore: productsReducer,
     SingleProductStore: singleProductReducer,
     CartStore: cartReducer,
-    TempCartStore: persistedTempCartStore
+    TempCartStore: persistedTempCartStore,
+    CurrentUserStore: currentUserReducer
 });
