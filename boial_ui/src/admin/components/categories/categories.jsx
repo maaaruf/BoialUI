@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteCategoryAction, loadCategoriesAction } from '../../../store/action/categoryAction';
 import { Button, ButtonGroup, Modal } from '@material-ui/core';
 import EditCategory from './editCategory';
+import { useHistory } from 'react-router';
+import { ADMIN_CREATECATEGORY } from '../../../utils/constants';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -50,6 +52,8 @@ const useStyles = makeStyles({
 export default function Categories() {
     const dispatch = useDispatch();
     const categories = useSelector((store) => store.CategoryStore.data);
+    const classes = useStyles();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(loadCategoriesAction());
@@ -60,10 +64,15 @@ export default function Categories() {
         dispatch(deleteCategoryAction(id));
     }
 
-    const classes = useStyles();
+    const gotoCreateCategory = ()=> {
+        history.push(ADMIN_CREATECATEGORY);
+    }
 
     return (
         <>
+            <Button variant="outlined" color="primary" onClick={gotoCreateCategory} >Create Category</Button>
+            <br />
+            <br />
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="customized table">
                     <TableHead>
@@ -84,8 +93,8 @@ export default function Categories() {
                                 <StyledTableCell align="right">{row.description}</StyledTableCell>
                                 <StyledTableCell align="right">
                                     <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-                                        <EditCategory categoryId = {row._id}/>
-                                        <Button onClick = {(e)=>deleteCategory(e, row._id)}>Delete</Button>
+                                        <EditCategory categoryId={row._id} />
+                                        <Button onClick={(e) => deleteCategory(e, row._id)}>Delete</Button>
                                     </ButtonGroup>
                                 </StyledTableCell>
                             </StyledTableRow>
