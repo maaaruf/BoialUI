@@ -13,6 +13,8 @@ import { loadCategoriesAction } from '../../../store/action/categoryAction';
 import { Button, ButtonGroup, Modal } from '@material-ui/core';
 import EditCategory from '../categories/editCategory';
 import { loadProductsAction } from '../../../store/action/productAction';
+import { useHistory } from 'react-router';
+import { ADMIN_CREATEPRODUCT } from '../../../utils/constants';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -53,16 +55,20 @@ export default function Products() {
     const dispatch = useDispatch();
     const products = useSelector((store) => store.ProductsStore.data);
     const classes = useStyles();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(loadProductsAction()); 
     }, []);
 
-    console.log(products, "products from products page");
+    const gotoCreateProuct = ()=> {
+        history.push(ADMIN_CREATEPRODUCT);
+    }
 
     return (
         <>
-            <p>Products</p>
+            <Button variant="outlined" color="primary" onClick = {gotoCreateProuct} >Create Product</Button>
+            <br />
             <br />
 
             <TableContainer component={Paper}>
