@@ -5,40 +5,42 @@ import Orders from "./components/orders/orders";
 import Products from "./components/products/products";
 import NavBar from "./components/navbar/navbar";
 import Footer from "../shared/components/footer/footer";
-import { 
-    Switch, 
-    Route, 
-    Redirect 
+import {
+    Switch,
+    Route,
+    Redirect
 } from "react-router";
 import CreateProduct from "./components/products/createProduct";
 import CreateCategory from "./components/categories/createCategory";
+import LeftMenu from "./components/leftMenu/leftMenu";
 
 export function AdminRoutes() {
     return (
         <>
-            {/* <NavBar/> */}
+            <LeftMenu>
                 <Switch>
-                    <Route exact path = {ADMIN_DASHBOARD}>
-                        <AdminDashboard/>
+                    <Route exact path={ADMIN_DASHBOARD}>
+                        <AdminDashboard />
                     </Route>
-                    <Route exact path = {ADMIN_CREATEPRODUCT}>
-                        <CreateProduct/>
+                    <Route exact path={ADMIN_CREATEPRODUCT}>
+                        <CreateProduct />
                     </Route>
-                    <Route exact path = {ADMIN_CATEGORIES}>
-                        <Categories/>
+                    <Route exact path={ADMIN_CATEGORIES}>
+                        <Categories />
                     </Route>
-                    <Route exact path = {ADMIN_CREATECATEGORY}>
+                    <Route exact path={ADMIN_CREATECATEGORY}>
                         <CreateCategory />
                     </Route>
-                    <Route exact path = {ADMIN_ORDERS}>
-                        <Orders/>
+                    <Route exact path={ADMIN_ORDERS}>
+                        <Orders />
                     </Route>
-                    <Route exact path = {ADMIN_PRODUCTS}>
-                        <Products/>
+                    <Route exact path={ADMIN_PRODUCTS}>
+                        <Products />
                     </Route>
                     <Redirect exact to={ADMIN_DASHBOARD} from="/admin" />
                     <Redirect exact to="/404" from="*" />
                 </Switch>
+            </LeftMenu>
             {/* <Footer/> */}
         </>
     );

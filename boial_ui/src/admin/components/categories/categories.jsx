@@ -64,9 +64,6 @@ export default function Categories() {
 
     return (
         <>
-            <p>Categories</p>
-            <br />
-
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="customized table">
                     <TableHead>

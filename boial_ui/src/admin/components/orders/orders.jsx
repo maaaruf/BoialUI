@@ -10,6 +10,13 @@ import Paper from '@material-ui/core/Paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteCategoryAction, loadCategoriesAction } from '../../../store/action/categoryAction';
 import { Button, ButtonGroup, Modal, Grid } from '@material-ui/core';
+import { cancelOrderAction, loadOrderAction } from '../../../store/action/orderAction';
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -48,60 +55,57 @@ const useStyles = makeStyles({
 
 export default function Orders() {
     const dispatch = useDispatch();
-    const categories = useSelector((store) => store.CategoryStore.data);
+    const orders = useSelector((store) => store.OrderStore.data);
+    const classes = useStyles();
 
     useEffect(() => {
-        dispatch(loadCategoriesAction());
+        dispatch(loadOrderAction());
+        console.log("Order loading called");
     }, []);
 
-    const deleteCategory = (e, id) => {
-        e.preventDefault();
-        dispatch(deleteCategoryAction(id));
+    const cancelOrder = (id) => {
+        dispatch(cancelOrderAction(id));
     }
-
-    const classes = useStyles();
 
     return (
         <>
-            <Grid container spacing={3} justifyContent="center">
-                <Grid
-                    item
-                    lg={8}>
-                    <p>Orders</p>
-                    <br />
+            <p>Orders</p>
+            <br />
 
-                    <TableContainer component={Paper}>
-                        <Table className={classes.table} aria-label="customized table">
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell>Id</StyledTableCell>
-                                    <StyledTableCell align="left">Name</StyledTableCell>
-                                    <StyledTableCell align="right">Description</StyledTableCell>
-                                    <StyledTableCell align="right">Action</StyledTableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {categories.map((row) => (
-                                    <StyledTableRow key={row.name}>
-                                        <StyledTableCell component="th" scope="row">
-                                            {row._id}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="left">{row.name}</StyledTableCell>
-                                        <StyledTableCell align="right">{row.description}</StyledTableCell>
-                                        <StyledTableCell align="right">
-                                            <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-                                                {/* <EditCategory categoryId = {row._id}/> */}
-                                                <Button onClick={(e) => deleteCategory(e, row._id)}>Delete</Button>
-                                            </ButtonGroup>
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Id</StyledTableCell>
+                            <StyledTableCell align="center">Date</StyledTableCell>
+                            <StyledTableCell align="center">Status</StyledTableCell>
+                            <StyledTableCell align="center">Action</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {orders?.map((row) => (
+                            <StyledTableRow key={row.name}>
+                                <StyledTableCell component="th" scope="row">
+                                    {row._id}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">{row.date}</StyledTableCell>
+                                <StyledTableCell align="center">{
+                                    row.status === 0 ? 'Pending' :
+                                        row.status === 1 ? 'Confirmed' :
+                                            'Canceled'
+                                }</StyledTableCell>
 
-                </Grid>
-            </Grid>
+                                <StyledTableCell align="center">
+                                    {row.status !== 0 ?
+                                        <Button variant="outlined" color="primary" disabled onClick={() => cancelOrder(row._id)}>Cancel Order</Button> :
+                                        <Button variant="outlined" color="primary" onClick={() => cancelOrder(row._id)}>Cancel Order</Button>
+                                    }
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </>
     );
 }
