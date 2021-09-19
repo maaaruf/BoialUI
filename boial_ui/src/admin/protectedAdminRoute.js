@@ -3,8 +3,8 @@ import { Redirect, Route } from "react-router";
 import { LOGIN } from "../utils/constants";
 
 export default function ProtectedAdminRoute ({children}){
-    const token = useSelector(store => store.UserInfoStore.token);
+    const userInfo = useSelector(store => store.UserInfoStore);
     return (
-        <Route render={()=>(token != null)? children:<Redirect to={LOGIN}/>}/>
+        <Route render={()=>((userInfo.token !== null) && (userInfo.role === 'admin'))? children:<Redirect to={LOGIN}/>}/>
     );
 }
