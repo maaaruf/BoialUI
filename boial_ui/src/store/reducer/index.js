@@ -7,6 +7,7 @@ import { categoryReducer, singleCategoryReducer } from "./categoryReducer";
 import { productsReducer, singleProductReducer } from "./productReducer";
 import { cartReducer, tempCartReducer } from "./cartReducer";
 import { currentUserReducer } from "./currentUserReducer";
+import { orderReducer } from "./orderReducer";
 
 
 const userInfoPersistConfig = {
@@ -30,5 +31,6 @@ export const mainReducer = combineReducers({
     SingleProductStore: singleProductReducer,
     CartStore: cartReducer,
     TempCartStore: persistedTempCartStore,
-    CurrentUserStore: currentUserReducer
+    CurrentUserStore: currentUserReducer,
+    OrderStore: orderReducer
 });

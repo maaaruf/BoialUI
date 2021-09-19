@@ -11,26 +11,31 @@ export default function Profile() {
         dispatch(getCurrentUser());
     });
 
+    console.log(user);
+
     return <>
         <Grid container spacing={3} justifyContent="center">
             <Grid
                 item
                 lg={4}>
                 <button class="button" >
-                    <span>Login</span>
+                    <span>Edit User</span>
                 </button>
 
                 <button class="button" >
-                    <span>Login</span>
+                    <span>Orders</span>
                 </button>
 
             </Grid>
             <Grid
                 item
                 lg={6}>
-
-                
-
+                    <p>User Name: {user?.username}</p>
+                    <p>Role: {user?.role}</p>
+                    <p>First Name: {user?.firstname}</p>
+                    <p>Last Name: {user?.lastname}</p>
+                    <p>Email: {user?.email}</p>
+                    <p>Phone: {user?.phone}</p>
             </Grid>
         </Grid>
     </>

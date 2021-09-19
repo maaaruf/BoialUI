@@ -10,9 +10,11 @@ import { useSelector } from 'react-redux';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useState } from 'react';
+import { loadCartAction } from '../../../store/action/cartActions';
 
 export default function NavBar() {
-    const userStorage = useSelector((store) => store.UserInfoStore); //JSON.parse(localStorage.getItem(ActionTypes.SIGN_IN));
+    const userStorage = useSelector((store) => store.UserInfoStore);
     const cartItems = useSelector((store) => store.CartStore.data);
     const history = useHistory();
     const dispatch = useDispatch();
@@ -20,6 +22,9 @@ export default function NavBar() {
 
     console.log(userStorage, "Current User Storage from NavBar =======");
 
+    useState(()=>{
+        dispatch(loadCartAction());
+    },[]);
 
     const login = () => {
         console.log("Login");

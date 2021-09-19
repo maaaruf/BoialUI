@@ -10,6 +10,7 @@ export const LOGOUT = "/logout";
 export const USERBASE = "/user";
 export const CART = "/user/cart";
 export const PROFILE = "/user/profile";
+export const ORDER = "/user/order";
 
 export const ADMINBASE = "/admin";
 export const ADMIN_DASHBOARD = "/admin/dashboard";

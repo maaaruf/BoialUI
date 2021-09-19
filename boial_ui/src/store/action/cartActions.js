@@ -35,8 +35,8 @@ export const addToCartAction = (quantity, productId) => {
                 toastNotify(`Product added to cart Successfully.`, SUCCESSFUL);
                 dispatch(setCart(response.data?.products));
                 dispatch(loadCartAction());
-                
-            }else{
+
+            } else {
                 dispatch(setTempCart({
                     product: { id: productId, quantity: quantity }
                 }));
@@ -46,7 +46,7 @@ export const addToCartAction = (quantity, productId) => {
             }
         }
         catch (e) {
-            console.log(e,"================================================");
+            console.log(e, "================================================");
             toastNotify(`Product added to cart faild. ${e}`, ERROR);
         }
     }
@@ -64,17 +64,36 @@ export const loadCartAction = () => {
                 const response = await axios.get(url, { headers: { authorization: `bearer ${token}` } });
 
                 toastNotify(`${response}`, SUCCESSFUL);
-                toastNotify(`Product added to cart Successfully.`, SUCCESSFUL);
                 dispatch(setCart(response.data?.products));
-                
-            }else{
+
+            } else {
 
                 history.push('/login');
                 window.location.reload();
             }
         }
         catch (e) {
-            console.log(e,"================================================");
+            console.log(e, "================================================");
+            toastNotify(`Product added to cart faild. ${e}`, ERROR);
+        }
+    }
+}
+
+export const checkOutAction = () => {
+
+    return async (dispatch, getState) => {
+        try {
+            const { UserInfoStore } = getState();
+            const token = UserInfoStore.token;
+            const url = `${BASE_URL}/order/checkout`;
+
+            const response = await axios.get(url, { headers: { authorization: `bearer ${token}` } });
+            dispatch(loadCartAction());
+            toastNotify(`Cart checkouted successfully.`, SUCCESSFUL);
+            console.log(response);
+        }
+        catch (e) {
+            console.log(e, "================================================");
             toastNotify(`Product added to cart faild. ${e}`, ERROR);
         }
     }

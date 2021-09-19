@@ -3,11 +3,10 @@ import {
     Route, 
     Redirect 
 } from "react-router";
-import { CART, HOME, PROFILE } from "../utils/constants";
+import { CART, HOME, ORDER, PROFILE } from "../utils/constants";
 import Cart from "./components/cart/cart";
 import Profile from "./components/profile/profile";
-import Footer from "../shared/components/footer/footer";
-import NavBar from "../shared/components/navbar/navbar2";
+import Order from "./components/order/order";
 
 export function UserRoutes() {
     return (
@@ -19,6 +18,9 @@ export function UserRoutes() {
                     </Route>
                     <Route exact path={PROFILE}>
                         <Profile />
+                    </Route>
+                    <Route exact path={ORDER}>
+                        <Order />
                     </Route>
                     <Redirect exact to={PROFILE} from="/user" />
                     <Redirect exact to="/404" from="*" />

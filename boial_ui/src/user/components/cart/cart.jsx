@@ -13,7 +13,7 @@ import { deleteCategoryAction, loadCategoriesAction } from '../../../store/actio
 import { Button, ButtonGroup, Modal } from '@material-ui/core';
 import EditCategory from '../../../admin/components/categories/editCategory';
 import { Grid } from '@material-ui/core';
-import { addToCartAction, loadCartAction } from '../../../store/action/cartActions';
+import { addToCartAction, checkOutAction, loadCartAction } from '../../../store/action/cartActions';
 import { toastNotify } from '../../../utils/helpers/toastHelper';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -54,6 +54,7 @@ const useStyles = makeStyles({
 export default function Cart() {
     const dispatch = useDispatch();
     const cartItems = useSelector((store) => store.CartStore.data);
+    const classes = useStyles();
 
     useEffect(() => {
         dispatch(loadCartAction());
@@ -70,7 +71,10 @@ export default function Cart() {
         dispatch(addToCartAction(existingQuantity - 1, productId));
     }
 
-    const classes = useStyles();
+    const checkOut = ()=>{
+        dispatch(checkOutAction());
+    }
+
 
     return (
         <>
@@ -82,12 +86,16 @@ export default function Cart() {
                     <p>Cart</p>
                     <br />
 
+                    <Button onClick= {checkOut}> Check Out</Button>
+                    {/* <p>Total Price: {}</p> */}
                     <TableContainer component={Paper}>
                         <Table className={classes.table} aria-label="customized table">
                             <TableHead>
                                 <TableRow>
                                     <StyledTableCell>Title</StyledTableCell>
                                     <StyledTableCell align="left">Quantity</StyledTableCell>
+                                    <StyledTableCell align="left">Unit Price</StyledTableCell>
+                                    <StyledTableCell align="left">Price</StyledTableCell>
                                     <StyledTableCell align="right">Action</StyledTableCell>
                                 </TableRow>
                             </TableHead>
@@ -98,6 +106,8 @@ export default function Cart() {
                                             {row.productId.title}
                                         </StyledTableCell>
                                         <StyledTableCell align="left">{row.quantity}</StyledTableCell>
+                                        <StyledTableCell align="left">{row.productId.price}</StyledTableCell>
+                                        <StyledTableCell align="left">{row.productId.price * row.quantity}</StyledTableCell>
                                         <StyledTableCell align="right">
                                             <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
                                                 <Button onClick={(e) => decreaseQuantity(e, row.productId._id, row.quantity)}>-</Button>

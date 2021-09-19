@@ -10,6 +10,7 @@ export const ActionTypes = {
 
     CART:"CART",
     TEMP_CART:"TEMP_CART",
+    ORDER:"ORDER",
 
     CURRENT_USER: "CURRENTUSER"
 }
