@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ActionTypes } from '../../../store/actionType';
 import { useState } from 'react';
 import { toastNotify } from '../../../utils/helpers/toastHelper';
+import { useHistory } from 'react-router';
+import { ADMIN_CATEGORIES } from '../../../utils/constants';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateCategory() {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
     const [category, setCategory] = useState({ name: "", description: "" });
 
     const updateCategory = (property, value) => {
@@ -36,6 +39,7 @@ export default function CreateCategory() {
         console.log(category, "category from Create Category page ========");
 
         dispatch(createCategoryAction(category));
+        history.push(ADMIN_CATEGORIES);
     }
 
     return (
