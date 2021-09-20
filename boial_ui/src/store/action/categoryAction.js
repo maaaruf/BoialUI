@@ -29,7 +29,6 @@ export const createCategoryAction = (category) => {
             const response = await axios.post(url, data, { headers: { authorization: `bearer ${token}` } });
 
             toastNotify(`${response.data.name} Created Successfully.`, SUCCESSFUL);
-            console.log(response, "==========================");
         }
         catch (e) {
             toastNotify(`Faild to create ${category.name}. ${e}`, ERROR);
@@ -49,10 +48,10 @@ export const editCategoryAction = (category) => {
             dispatch(loadCategoriesAction());
 
             toastNotify(`${response.data.name} Edited Successfully.`, SUCCESSFUL);
-            console.log(response, "==========================");
         }
         catch (e) {
             toastNotify(`Faild to Edit ${category.name}. ${e}`, ERROR);
+            console.log("Failed to edit category", e);
         }
     }
 };
@@ -66,11 +65,10 @@ export const loadCategoriesAction = () => {
             const url = `${BASE_URL}/category`;
             const response = await axios.get(url, {}, { headers: { authorization: `bearer ${token}` } });
 
-            toastNotify(`Category Loaded Successfully.`, SUCCESSFUL);
             dispatch(setCategoryList(response.data));
         }
         catch (e) {
-            toastNotify(`Faild to Load. ${e}`, ERROR);
+            console.log(`Faild to Load. ${e}`, e);
         }
     }
 };
@@ -84,12 +82,11 @@ export const getCategoryAction = (id) => {
             const url = `${BASE_URL}/category/${id}`;
             const response = await axios.get(url, {}, { headers: { authorization: `bearer ${token}` } });
 
-            toastNotify(`Category Loaded Successfully.`, SUCCESSFUL);
             dispatch(setSingleCategory(response.data));
             
         }
         catch (e) {
-            toastNotify(`Faild to create Load. ${e}`, ERROR);
+            console.log("Failed to load category", e);
         }
     }
 };

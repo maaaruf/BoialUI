@@ -47,11 +47,10 @@ export const loadProductsAction = () => {
             const token = UserInfoStore.token;
             const response = await axios.get(url, {}, { headers: { authorization: `bearer ${token}` } });
 
-            toastNotify(`Products Loaded Successfully.`, SUCCESSFUL);
             dispatch(setProductsList(response.data));
         }
         catch(e){
-            toastNotify(`Faild to load products. ${e}`, ERROR);
+            console.log("Failed to load products", e);
         }
     }
 };
@@ -65,13 +64,30 @@ export const getProductAction = (id) => {
             const token = UserInfoStore.token;
             const response = await axios.get(url, {}, { headers: { authorization: `bearer ${token}` } });
 
-            toastNotify(`Products Loaded Successfully.`, SUCCESSFUL);
             dispatch(setSingleProduct(response.data));
-
-            console.log(response, "Response from getProductAction");
         }
         catch(e){
-            toastNotify(`Faild to load products. ${e}`, ERROR);
+            console.log("Failed to get product", e);
+        }
+    }
+};
+
+export const deleteProductAction = (id) => {
+
+    return async (dispatch, getState) => {
+        try {
+            const url = `${BASE_URL}/products/${id}`;
+            const { UserInfoStore } = getState();
+            const token = UserInfoStore.token;
+            const response = await axios.delete(url, { headers: { authorization: `bearer ${token}` } });
+
+            dispatch(loadProductsAction());
+            toastNotify("Product Deleted Successfully", SUCCESSFUL)
+
+        }
+        catch(e){
+            toastNotify("Failed to delete", ERROR);
+            console.log("Failed to get product", e);
         }
     }
 };

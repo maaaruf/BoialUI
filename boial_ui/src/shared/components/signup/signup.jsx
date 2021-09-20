@@ -42,17 +42,10 @@ export default function SignUp() {
 
     const updateUserInfo = (fieldName, value) => {
         setUserInfo(user => ({ ...user, [fieldName]: value}));
-
-        // setUserInfo(user => ({...user,  [fieldName]: value, address: {...user.address, [fieldName]: value}}));
-
-        console.log(userInfo);
-        console.log("^ User Adderess");
     }
 
     const updateAddressInfo = (fieldName, value) => {
         setUserInfo(user => ({...user, address: {...user.address, [fieldName]: value}}));
-        console.log(userInfo);
-        // setAddressInfo(address => ({ ...address, [fieldName]: value }));
     }
 
     const updateGeoLocationInfo = (fieldName, value) => {
@@ -61,20 +54,9 @@ export default function SignUp() {
     }
 
     const signUp = () => {
-        console.log(addressInfo);
-        console.log(geoLocationInfo);
-
         setAddressInfo(address => ({ ...address, ["geoLocation"]: geoLocationInfo }));
         setUserInfo(user => ({ ...user, ["address"]: addressInfo }));
-
-        console.log(userInfo);
-        console.log("^ Above user info ===============");
-        // fetch(`${BASE_URL}/signup`, {
-        //     method: "POST", userInfo
-        // })
-        //     .then((res) => res.json())
-        //     .then((json) => console.log(json));
-
+        
         axios.post(`${BASE_URL}/signup`, userInfo)
           .then(function (response) {
             console.log(response);

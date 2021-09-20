@@ -32,7 +32,7 @@ export const addToCartAction = (quantity, productId) => {
                     product: { id: productId, quantity: quantity }
                 }, { headers: { authorization: `bearer ${token}` } });
 
-                toastNotify(`Product added to cart Successfully.`, SUCCESSFUL);
+                toastNotify(`Added to cart Successfully.`, SUCCESSFUL);
                 dispatch(setCart(response.data?.products));
                 dispatch(loadCartAction());
 
@@ -63,7 +63,6 @@ export const loadCartAction = () => {
             if (token != null) {
                 const response = await axios.get(url, { headers: { authorization: `bearer ${token}` } });
 
-                toastNotify(`${response}`, SUCCESSFUL);
                 dispatch(setCart(response.data?.products));
 
             } else {

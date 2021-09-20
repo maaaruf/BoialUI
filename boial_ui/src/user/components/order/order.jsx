@@ -69,50 +69,43 @@ export default function Order() {
 
     return (
         <>
-            <Grid container spacing={3} justifyContent="center">
-                <Grid
-                    item
-                    lg={8}>
-                    <p>Orders</p>
-                    <br />
+            <p>Orders</p>
+            <br />
 
-                    <TableContainer component={Paper}>
-                        <Table className={classes.table} aria-label="customized table">
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell>Id</StyledTableCell>
-                                    <StyledTableCell align="center">Date</StyledTableCell>
-                                    <StyledTableCell align="center">Status</StyledTableCell>
-                                    <StyledTableCell align="center">Action</StyledTableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {orders?.map((row) => (
-                                    <StyledTableRow key={row.name}>
-                                        <StyledTableCell component="th" scope="row">
-                                            {row._id}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="center">{row.date}</StyledTableCell>
-                                        <StyledTableCell align="center">{
-                                            row.status === 0 ? 'Pending' :
-                                                row.status === 1 ? 'Confirmed' :
-                                                    'Canceled'
-                                        }</StyledTableCell>
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Id</StyledTableCell>
+                            <StyledTableCell align="center">Date</StyledTableCell>
+                            <StyledTableCell align="center">Status</StyledTableCell>
+                            <StyledTableCell align="center">Action</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {orders?.map((row) => (
+                            <StyledTableRow key={row.name}>
+                                <StyledTableCell component="th" scope="row">
+                                    {row._id}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">{row.date}</StyledTableCell>
+                                <StyledTableCell align="center">{
+                                    row.status === 0 ? 'Pending' :
+                                        row.status === 1 ? 'Confirmed' :
+                                            'Canceled'
+                                }</StyledTableCell>
 
-                                        <StyledTableCell align="center">
-                                            {row.status !== 0 ?
-                                                <Button variant="outlined" color="primary" disabled onClick={() => cancelOrder(row._id)}>Cancel Order</Button> :
-                                                <Button variant="outlined" color="primary" onClick={() => cancelOrder(row._id)}>Cancel Order</Button>
-                                            }
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-
-                </Grid>
-            </Grid>
+                                <StyledTableCell align="center">
+                                    {row.status !== 0 ?
+                                        <Button variant="outlined" color="primary" disabled onClick={() => cancelOrder(row._id)}>Cancel Order</Button> :
+                                        <Button variant="outlined" color="primary" onClick={() => cancelOrder(row._id)}>Cancel Order</Button>
+                                    }
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </>
     );
 }

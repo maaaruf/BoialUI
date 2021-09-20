@@ -71,56 +71,49 @@ export default function Cart() {
         dispatch(addToCartAction(existingQuantity - 1, productId));
     }
 
-    const checkOut = ()=>{
+    const checkOut = () => {
         dispatch(checkOutAction());
     }
 
 
     return (
         <>
-            <Grid container spacing={3} justifyContent="center">
-                <Grid
-                    item
-                    lg={8}>
+            <p>Cart</p>
+            <br />
 
-                    <p>Cart</p>
-                    <br />
-
-                    <Button onClick= {checkOut}> Check Out</Button>
-                    {/* <p>Total Price: {}</p> */}
-                    <TableContainer component={Paper}>
-                        <Table className={classes.table} aria-label="customized table">
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell>Title</StyledTableCell>
-                                    <StyledTableCell align="left">Quantity</StyledTableCell>
-                                    <StyledTableCell align="left">Unit Price</StyledTableCell>
-                                    <StyledTableCell align="left">Price</StyledTableCell>
-                                    <StyledTableCell align="right">Action</StyledTableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {cartItems?.map((row) => (
-                                    <StyledTableRow key={row.name}>
-                                        <StyledTableCell component="th" scope="row">
-                                            {row.productId.title}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="left">{row.quantity}</StyledTableCell>
-                                        <StyledTableCell align="left">{row.productId.price}</StyledTableCell>
-                                        <StyledTableCell align="left">{row.productId.price * row.quantity}</StyledTableCell>
-                                        <StyledTableCell align="right">
-                                            <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-                                                <Button onClick={(e) => decreaseQuantity(e, row.productId._id, row.quantity)}>-</Button>
-                                                <Button onClick={(e) => increaseQuantity(e, row.productId._id, row.quantity)}>+</Button>
-                                            </ButtonGroup>
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Grid>
-            </Grid>
+            <Button onClick={checkOut}> Check Out</Button>
+            {/* <p>Total Price: {}</p> */}
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Title</StyledTableCell>
+                            <StyledTableCell align="left">Quantity</StyledTableCell>
+                            <StyledTableCell align="left">Unit Price</StyledTableCell>
+                            <StyledTableCell align="left">Price</StyledTableCell>
+                            <StyledTableCell align="right">Action</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {cartItems?.map((row) => (
+                            <StyledTableRow key={row.name}>
+                                <StyledTableCell component="th" scope="row">
+                                    {row.productId.title}
+                                </StyledTableCell>
+                                <StyledTableCell align="left">{row.quantity}</StyledTableCell>
+                                <StyledTableCell align="left">{row.productId.price}</StyledTableCell>
+                                <StyledTableCell align="left">{row.productId.price * row.quantity}</StyledTableCell>
+                                <StyledTableCell align="right">
+                                    <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+                                        <Button onClick={(e) => decreaseQuantity(e, row.productId._id, row.quantity)}>-</Button>
+                                        <Button onClick={(e) => increaseQuantity(e, row.productId._id, row.quantity)}>+</Button>
+                                    </ButtonGroup>
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </>
     );
 }

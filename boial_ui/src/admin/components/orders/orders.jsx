@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteCategoryAction, loadCategoriesAction } from '../../../store/action/categoryAction';
 import { Button, ButtonGroup, Modal, Grid } from '@material-ui/core';
-import { cancelOrderAction, loadOrderAction } from '../../../store/action/orderAction';
+import { cancelOrderAction, changeOrderStatusAction, loadOrderAction } from '../../../store/action/orderAction';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -63,8 +63,8 @@ export default function Orders() {
         console.log("Order loading called");
     }, []);
 
-    const cancelOrder = (id) => {
-        dispatch(cancelOrderAction(id));
+    const changeOrderStatus = (id, status) => {
+        dispatch(changeOrderStatusAction(id, status));
     }
 
     return (
@@ -79,7 +79,6 @@ export default function Orders() {
                             <StyledTableCell>Id</StyledTableCell>
                             <StyledTableCell align="center">Date</StyledTableCell>
                             <StyledTableCell align="center">Status</StyledTableCell>
-                            <StyledTableCell align="center">Action</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -89,18 +88,22 @@ export default function Orders() {
                                     {row._id}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">{row.date}</StyledTableCell>
+
                                 <StyledTableCell align="center">{
-                                    row.status === 0 ? 'Pending' :
-                                        row.status === 1 ? 'Confirmed' :
-                                            'Canceled'
+                                    <Select
+                                        labelId="demo-simple-select-autowidth-label"
+                                        id="demo-simple-select-autowidth"
+                                        value={row.status}
+                                        onChange={(e) => changeOrderStatus(row._id, e.target.value)}
+                                        autoWidth
+                                        label="Age"
+                                    >
+                                        <MenuItem value={0}>Pending</MenuItem>
+                                        <MenuItem value={1}>Confirmed</MenuItem>
+                                        <MenuItem value={2}>Canceled</MenuItem>
+                                    </Select>
                                 }</StyledTableCell>
 
-                                <StyledTableCell align="center">
-                                    {row.status !== 0 ?
-                                        <Button variant="outlined" color="primary" disabled onClick={() => cancelOrder(row._id)}>Cancel Order</Button> :
-                                        <Button variant="outlined" color="primary" onClick={() => cancelOrder(row._id)}>Cancel Order</Button>
-                                    }
-                                </StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

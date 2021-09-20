@@ -7,14 +7,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { loadCategoriesAction } from '../../../store/action/categoryAction';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteCategoryAction, loadCategoriesAction } from '../../../store/action/categoryAction';
 import { Button, ButtonGroup, Modal } from '@material-ui/core';
-import EditCategory from '../categories/editCategory';
-import { deleteProductAction, loadProductsAction } from '../../../store/action/productAction';
+// import EditCategory from './editCategory';
 import { useHistory } from 'react-router';
-import { ADMIN_CREATEPRODUCT } from '../../../utils/constants';
+import { ADMIN_CREATECATEGORY } from '../../../utils/constants';
+import { deleteUsersAction, loadUsersAction } from '../../../store/action/userActions';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -51,58 +50,62 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Products() {
+export default function Users() {
     const dispatch = useDispatch();
-    const products = useSelector((store) => store.ProductsStore.data);
+    const categories = useSelector((store) => store.CategoryStore.data);
+    const users = useSelector((store) => store.UsersStore.data);
     const classes = useStyles();
     const history = useHistory();
 
     useEffect(() => {
-        dispatch(loadProductsAction()); 
+        dispatch(loadCategoriesAction());
+        dispatch(loadUsersAction());
     }, []);
 
-    const gotoCreateProuct = ()=> {
-        history.push(ADMIN_CREATEPRODUCT);
+    const deleteUser = (e, id) => {
+        e.preventDefault();
+        dispatch(deleteUsersAction(id));
     }
 
-    const deleteProduct = (id) => {
-        dispatch(deleteProductAction(id));
-
-        console.log("Deleteing product=============", id);
+    const gotoSignup = ()=> {
+        history.push('/signup');
     }
 
     return (
         <>
-            <Button variant="outlined" color="primary" onClick = {gotoCreateProuct} >Create Product</Button>
+            <Button variant="outlined" color="primary" onClick={gotoSignup} >Create User</Button>
             <br />
             <br />
-
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="customized table">
                     <TableHead>
                         <TableRow>
                             <StyledTableCell>Id</StyledTableCell>
-                            <StyledTableCell align="left">Title</StyledTableCell>
-                            <StyledTableCell align="right">Stock</StyledTableCell>
-                            <StyledTableCell align="right">Price</StyledTableCell>
-                            <StyledTableCell align="right">Description</StyledTableCell>
-                            <StyledTableCell align="center">Action</StyledTableCell>
+                            <StyledTableCell align="left">Email</StyledTableCell>
+                            <StyledTableCell align="right">User Name</StyledTableCell>
+                            <StyledTableCell align="right">Name</StyledTableCell>
+                            <StyledTableCell align="right">Role</StyledTableCell>
+                            <StyledTableCell align="right">Phone</StyledTableCell>
+                            <StyledTableCell align="right">City</StyledTableCell>
+                            <StyledTableCell align="right">Action</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {products?.map((row) => (
+                        {users?.map((row) => (
                             <StyledTableRow key={row.name}>
                                 <StyledTableCell component="th" scope="row">
                                     {row._id}
                                 </StyledTableCell>
-                                <StyledTableCell align="left">{row.title}</StyledTableCell>
-                                <StyledTableCell align="right">{row.stock}</StyledTableCell>
-                                <StyledTableCell align="right">{row.price}</StyledTableCell>
-                                <StyledTableCell align="right">{row.description}</StyledTableCell>
-                                <StyledTableCell align="center">
+                                <StyledTableCell align="left">{row.email}</StyledTableCell>
+                                <StyledTableCell align="right">{row.username}</StyledTableCell>
+                                <StyledTableCell align="right">{`${row.firstname} ${row.lastname}`}</StyledTableCell>
+                                <StyledTableCell align="right">{row.role}</StyledTableCell>
+                                <StyledTableCell align="right">{row.phone}</StyledTableCell>
+                                <StyledTableCell align="right">{row.address.city}</StyledTableCell>
+                                <StyledTableCell align="right">
                                     <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-                                        <EditCategory categoryId = {row._id}/>
-                                        <Button onClick={()=>deleteProduct(row._id)} >Delete</Button>
+                                        {/* <EditCategory categoryId={row._id} /> */}
+                                        <Button onClick={(e) => deleteUser(e, row._id)}>Delete</Button>
                                     </ButtonGroup>
                                 </StyledTableCell>
                             </StyledTableRow>

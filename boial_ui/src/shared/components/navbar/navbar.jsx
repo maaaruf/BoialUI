@@ -12,6 +12,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useState } from 'react';
 import { loadCartAction } from '../../../store/action/cartActions';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { SIGNUP, USERBASE } from '../../../utils/constants';
 
 export default function NavBar() {
     const userStorage = useSelector((store) => store.UserInfoStore);
@@ -20,19 +22,19 @@ export default function NavBar() {
     const dispatch = useDispatch();
     const cartLength = cartItems?.length;
 
-    console.log(userStorage, "Current User Storage from NavBar =======");
-
     useState(()=>{
-        dispatch(loadCartAction());
+        //dispatch(loadCartAction());
     },[]);
 
     const login = () => {
-        console.log("Login");
         history.push('/login');
     }
 
+    const signUp = () => {
+        history.push(SIGNUP);
+    }
+
     const logout = () => {
-        console.log("Logout");
         dispatch(signOut());
         history.push('/home');
     }
@@ -50,12 +52,15 @@ export default function NavBar() {
             loggedIn = false;
         }
 
-        console.log("Logged In? =====> ", loggedIn);
         return loggedIn;
     }
 
     const gotoCart = () => {
         history.push('/user/cart');
+    }
+
+    const gotoUser = () => {
+        history.push(USERBASE);
     }
 
     return (
@@ -74,7 +79,7 @@ export default function NavBar() {
                         <><span className="material-icons-outlined" title="Account">account_circle</span>
                             <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
                                 <Button onClick={login} >Login</Button>
-                                <Button>SignUp</Button>
+                                <Button onClick={signUp}>SignUp</Button>
                             </ButtonGroup>
                         </>}
 
@@ -88,6 +93,10 @@ export default function NavBar() {
 
                             <Badge onClick={gotoCart} badgeContent={cartLength} color="primary">
                                 <ShoppingCartIcon color="action" />
+                            </Badge>
+
+                            <Badge onClick={gotoUser} color="primary">
+                                <AccountCircleIcon />
                             </Badge>
 
                             <span class="material-icons-outlined" title="Logout"> logout </span>

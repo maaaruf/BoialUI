@@ -6,7 +6,6 @@ import { BASE_URL } from '../../../utils/constants';
 import { signInAction } from '../../../store/action/signInAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionTypes } from '../../../store/actionType';
-import { history } from '../../../utils/helpers/helper';
 import { useHistory } from 'react-router';
 
 
@@ -24,8 +23,6 @@ export default function Login() {
 
     const login = (e)=>{
         e.preventDefault();
-        //history.push('/home');
-
         dispatch(signInAction(userInfo));
     }
 

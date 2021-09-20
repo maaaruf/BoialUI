@@ -19,14 +19,14 @@ export default function Router() {
                 <UserRoutes />
             </Route>
             <Route path="/admin">
-                <ProtectedAdminRoute>
+                <AdminRoutes />
+                {/* <ProtectedAdminRoute>
                     <AdminRoutes />
-                </ProtectedAdminRoute>
+                </ProtectedAdminRoute> */}
             </Route>
             <Route path="/">
                 <CommonRoutes />
             </Route>
-            <Route render={()=>(role == 'admin')? <Redirect to={'/admin'}/>:<Redirect to={'/home'}/>}/>
         </Switch>
     )
 }

@@ -12,5 +12,6 @@ export const ActionTypes = {
     TEMP_CART:"TEMP_CART",
     ORDER:"ORDER",
 
-    CURRENT_USER: "CURRENTUSER"
+    CURRENT_USER: "CURRENTUSER",
+    USERS: "USERS"
 }

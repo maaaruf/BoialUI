@@ -40,6 +40,25 @@ export const cancelOrderAction = (id) => {
             dispatch(loadOrderAction());
         }
         catch (e) {
+            console.log(e, "Failed to cancel order");
+        }
+    }
+}
+
+export const changeOrderStatusAction = (id, status) => {
+
+    return async (dispatch, getState) => {
+        try {
+            const { UserInfoStore } = getState();
+            const token = UserInfoStore.token;
+            const url = `${BASE_URL}/order/${id}`;
+            status = parseInt(status);
+
+            const response = await axios.patch(url, { status: status }, { headers: { authorization: `bearer ${token}` }});
+
+            dispatch(loadOrderAction());
+        }
+        catch (e) {
             console.log(e, "Failed to load Orders list");
         }
     }
