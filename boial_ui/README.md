@@ -1,7 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+This project was buit as final project of my React training at Devskill, Backend of this project can be found here: https://github.com/arnab-shuvo/fakecommerce
 ## Available Scripts
 
 In the project directory, you can run:
