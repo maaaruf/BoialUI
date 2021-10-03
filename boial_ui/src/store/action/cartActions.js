@@ -32,7 +32,7 @@ export const addToCartAction = (quantity, productId) => {
                     product: { id: productId, quantity: quantity }
                 }, { headers: { authorization: `bearer ${token}` } });
 
-                toastNotify(`Added to cart Successfully.`, SUCCESSFUL);
+                //toastNotify(`Added to cart Successfully.`, SUCCESSFUL);
                 dispatch(setCart(response.data?.products));
                 dispatch(loadCartAction());
 
@@ -73,7 +73,7 @@ export const loadCartAction = () => {
         }
         catch (e) {
             console.log(e, "================================================");
-            toastNotify(`Product added to cart faild. ${e}`, ERROR);
+            //toastNotify(`Product added to cart faild. ${e}`, ERROR);
         }
     }
 }

@@ -29,10 +29,10 @@ export const createProductAction = (product) => {
             const data = product;
             const response = await axios.post(url, data, { headers: { authorization: `bearer ${token}` } });
 
-            toastNotify(`${response.data.name} Created Successfully.`, SUCCESSFUL);
+            toastNotify(`Product Created Successfully.`, SUCCESSFUL);
         }
         catch(e){
-            toastNotify(`Faild to create ${product.title}. ${e}`, ERROR);
+            toastNotify(`Faild to create product. ${e}`, ERROR);
             console.log("Error in creating product : ", e);
         }
     }

@@ -24,22 +24,6 @@ export default function SignUp() {
         phone: '',
     });
 
-    const [addressInfo, setAddressInfo] = useState({
-        city: '',
-        street: '',
-        number: '',
-        zipcode: '',
-        geolocation: {
-            lat: '',
-            long: '',
-        },
-    });
-
-    const [geoLocationInfo, setGeoLocationInfo] = useState({
-        lat: '',
-        long: '',
-    });
-
     const updateUserInfo = (fieldName, value) => {
         setUserInfo(user => ({ ...user, [fieldName]: value}));
     }
@@ -50,13 +34,10 @@ export default function SignUp() {
 
     const updateGeoLocationInfo = (fieldName, value) => {
         setUserInfo(user => ({...user, address: {...user.address, geolocation: {...user.address.geolocation, [fieldName]: value}}}));
-        // setGeoLocationInfo(location => ({ ...location, [fieldName]: value }));
     }
 
     const signUp = () => {
-        setAddressInfo(address => ({ ...address, ["geoLocation"]: geoLocationInfo }));
-        setUserInfo(user => ({ ...user, ["address"]: addressInfo }));
-        
+
         axios.post(`${BASE_URL}/signup`, userInfo)
           .then(function (response) {
             console.log(response);
@@ -68,9 +49,6 @@ export default function SignUp() {
 
     return (
         <>
-            {/* <div style = {{textAlign:"center"}}>
-                <h1>Create an account</h1>
-            </div> */}
             <div className="column">
                 <div className="illustration">
                     <img src={signUpImage} alt="Signup" />
